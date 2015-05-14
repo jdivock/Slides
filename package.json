@@ -1,9 +1,8 @@
 {
   "name": "reveal.js",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "description": "The HTML Presentation Framework",
-  "homepage": "http://lab.hakim.se/reveal-js",
-  "subdomain": "revealjs",
+        "homepage": "http://slides.jdivock.com",
   "main": "server.js",
   "scripts": {
     "test": "grunt test",
@@ -16,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git://github.com/jdivock/reveal.js.git"
   },
   "engines": {
     "node": "~0.10.0"
