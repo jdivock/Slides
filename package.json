@@ -1,13 +1,12 @@
 {
   "name": "reveal.js",
-  "version": "3.0.0",
+  "version": "1.0.0",
   "description": "The HTML Presentation Framework",
-  "homepage": "http://lab.hakim.se/reveal-js",
-  "subdomain": "revealjs",
-  "main": "js/reveal.js",
+        "homepage": "http://slides.jdivock.com",
+  "main": "server.js",
   "scripts": {
     "test": "grunt test",
-    "start": ""
+    "start": "node server.js"
   },
   "author": {
     "name": "Hakim El Hattab",
@@ -16,16 +15,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git://github.com/jdivock/reveal.js.git"
   },
   "engines": {
     "node": "~0.10.0"
   },
   "dependencies": {
-    "underscore": "~1.5.1",
-    "express": "~2.5.9",
+    "express": "^4.12.3",
     "mustache": "~0.7.2",
-    "socket.io": "~0.9.16"
+    "socket.io": "~0.9.16",
+    "underscore": "~1.5.1"
   },
   "devDependencies": {
     "grunt-contrib-qunit": "~0.5.2",
