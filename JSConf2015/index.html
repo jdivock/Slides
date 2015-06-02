@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JSConf 2015</title>
+
+		<meta name="description" content="JSConf 2015">
+		<meta name="author" content="Jason Divock">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="/css/reveal.css">
+		<link rel="stylesheet" href="/css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="/lib/css/zenburn.css">
+
+        <style>
+            dt, dd { float: left }
+            dt { clear:both }
+        </style>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '/css/print/pdf.css' : '/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>JSConf 2015</h1>
+					<p>
+						<small>Created by <a href="http://jasondivock.com">Jason Divock</a> / <a href="http://twitter.com/jdivock">@jdivock</a></small>
+					</p>
+				</section>
+
+                <section>
+                    <h2>It's where the cool kids are</h2>
+                    <p>Yearly conference in the US</p>
+                    <p>1 curated track</p>
+                    <p>1 open track</p>
+                    <p>1 training track</p>
+                </section>
+
+                <section>
+                    <h2>They're all over now</h2>
+                    <p>Other satellite conferences</p>
+                    <p>JSConfEU, JSConfBR, JSConfAsia, etc</p>
+                </section>
+
+                <!-- ES2016 Jafar: BEGIN -->
+                <section>
+                    <h2>Jafar Husain: Async Programming in ES7</h2>
+                    <p>In which I attempt to explain generators and async in 5 minutes</p>
+                </section>
+
+                <section>
+                    <h2>Ship every year</h2>
+                    <ul>
+                        <li>ES6 -> ES2015</li>
+                        <li>ES7 -> ES2016</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Better and easier Async functions</h2>
+                    <p>Callback hell sucks</p>
+                    <p>Even with promises we need to forward errors up the chain</p>
+                </section>
+
+                <section>
+                    <p>Generators produce data via iteration</p>
+                    <pre><code data-trim>
+// data producer
+function* nums() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+                    </code></pre>
+                </section>
+
+
+                <section>
+                    <p>for...of loop consumes via iteration</p>
+                    <pre><code data-trim>
+// data consumer
+function printData() {
+  for(var x of nums()) {
+    console.log(x);
+  }
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>That's great for synchronous data</h2>
+                    <h5>Not so much for async data</h5>
+                </section>
+
+                <section>
+                    <h2>So how about for..on instead</h2>
+                    <pre><code data-trim>
+// data producer
+async function* nums() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+// data consumer
+async function printData() {
+  for(var x on nums()) {
+    console.log(x);
+  }
+}
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>When awaiting values to return</h2>
+                    <pre>
+                        <code data-trim>
+    // Example Generator
+    function* getKeyFrames(video) {
+        var allFrames = yield getFrames(video);
+        var keyFrames = yield filterKeys(allFrames);
+        return keyFrames;
+    }
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>Oof, that was rough, here's his proposal</h2>
+                    <p>https://github.com/jhusain/asyncgenerator</p>
+                </section>
+                <!-- ES2016 Jafar: END -->
+
+                <!-- Cold War - Simon Swain: BEGIN -->
+                <section>
+                    <h2>Cold War: Simon Swain</h2>
+                    <h4>And the award for best slides goes to . . . </h4>
+                </section>
+
+                <section>
+                    <h2>Build a cold war simulator with html canvas</h2>
+                    <p>Very Atari Missle Defender-esque</p>
+                    <a href="https://simonswain.com/coldwar" target="_blank">Demo</a>
+                </section>
+
+                <section>
+                    <h2>Beautifully build simulation using HTML5 canvas</h2>
+                    <p>If you're curious about building something similar, check out Eloquent Javascript</p>
+                </section>
+                <!-- Cold War - Simon Swain: END -->
+
+                <!-- KATE HUDSON - Building a responsive web - START -->
+                <section>
+                    <h2>Kate Hudson: Build the mobile web you want</h2>
+                    <h4>The web is broken</h4>
+                </section>
+
+                <section>
+                    <h2>Native was built with solving application problems in mind</h2>
+                    <h4>The web wasn't</h4>
+                </section>
+
+                <section>
+                    <h2>The state of the web in 2004</h2>
+                    <p>Wallpapers</p>
+                    <p>Kazaa</p>
+                    <p>PHP5</p>
+                    <p>And then . . . gmail</p>
+                </section>
+
+                <section>
+                    <h2>GMail</h2>
+                    <p>And app . . . in javascript!</p>
+                    <p>Everyone told the lead dev it was an awful idea</p>
+                    <p>"If amazon can do without JS, so can you"</p>
+                    <p>First rich client experience</p>
+                    <p>Basically you're all here because of a massive hack</p>
+                </section>
+
+                <section>
+                    <h2>Different levels of hack</h2>
+                    <ul>
+                        <li>Try out stuff before it's ready (experimental flag, transpiler)</li>
+                        <li>New Abstractions</li>
+                        <li>Hack together your own user agent</li>
+                        <li>Hybrid apps</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Hybrid apps</h2>
+                    <p>Crosswalk: Put chromium in android so you don't fight with Browser</p>
+                    <p>Use native to select the route, then react to render the view</p>
+                </section>
+                <!-- KATE HUDSON - Building a responsive web - END -->
+
+
+                <!-- Making Relational Cool Again: BEGIN -->
+                <section>
+                    <h2>Making Relational Cool Again: Javascript on ACID</h2>
+                    <h4>Tim Griesser</h4>
+                </section>
+
+                <section>
+                    <h2>Lots of stacks to choose from</h2>
+                    <img src="img/Lebron.png"/>
+                </section>
+
+                <section>
+                    <h2>Bringing the strong points of DBs to JS</h2>
+                    <h3>KNEX.js</h3>
+                    <pre>
+                        <code>
+var knex = require('knex')({
+  client: 'postgresql',
+  connection: process.env.PG_CONNECTION_STRING,
+  pool: {
+    min: 0,
+    max: 10
+  }
+});
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>KNEX</h2>
+                    <h4>Connect to the db and have fun out there</h4>
+                    <pre>
+                        <code>
+knex.select('*')
+  .from('accounts')
+  .where({activated: 1})
+  .then(function(accounts){
+   //..
+  })
+  .catch(function(err){
+  //..
+  })
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>KNEX</h2>
+                    <p>Transactions</p>
+                    <ul>
+                        <li>Ability to roll back</li>
+                        <li>Snapshot stae of the world</li>
+                        <li>Prevent others from altering data you're working with</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Bookshelf.js</h2>
+                    <ul>
+                        <li>ORM</li>
+                        <li>fetch/save/destroy</li>
+                        <li>1-1/1-many/many-many</li>
+                        <li>Builds on KNEX</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Bookshelf</h2>
+                    <pre>
+                        <code>
+var Comment = bookshelf.Model.extend({
+  tableName: 'comments',
+
+  author: function(){
+    return this.belongsTo(Account);
+  }
+});
+                        </code>
+                    </pre>
+                </section>
+
+                <section>
+                    <h2>Other solutions as well</h2>
+                    <ul>
+                        <li>OpenRecord</li>
+                        <li>Sequelize</li>
+                        <li>Azul.js</li>
+                        <li>Sails.js</li>
+                    </ul>
+                </section>
+                <!-- Making Relational Cool Again: END -->
+
+                <!-- Marik Kosak = Knitting for JS: BEGIN -->
+                <section>
+                    <h2>Knitting for Javascripters: Mariko Kosak</h2>
+                    <h4>BKJS in the house</h4>
+                </section>
+
+                <section>
+                    <h2>I met Mariko right before moving out here</h2>
+                    <p>Since then she's spoken at a couple borough meetups and helps run BKJS</p>
+                    <p>And now she's speaking at JSConf</p>
+                    <p>Feeling pretty bad about myself right now</p>
+                </section>
+
+                <section>
+                    <h2>So right, knitting</h2>
+                    <p>Something possesed her to make a JS program to run a semi-automatic knitting machine</p>
+                </section>
+
+                <section>
+                    <h2>Nothing is simple</h2>
+                    <p>Knitting machine busted</p>
+                    <p>No idea how to perform dithering in 2-tone</p>
+                    <p>Bugs in knitting are . . . different</p>
+                </section>
+
+                <!-- Marik Kosak = Knitting for JS: END -->
+
+                <!-- Mutations in Relay - Laney Kuenzel: START -->
+                <section id="relay">
+                    <h2>Mutations in Relay</h2>
+                    <h4>Laney Kuenzel</h4>
+                </section>
+
+                <section>
+                    <h2>Neither React nor Flux solve data fetching</h2>
+                    <p>Need to prevent scenarios where you're
+                        over-fetching</p>
+                    <p>Or worse, under-fetching and your page explodes</p>
+                </section>
+
+                <section>
+                    <h3>The current react structure has implementation
+                    details of components leaking to their parents</h3>
+                    <p>Changing a child neccessitates modiying all
+                        relevant parents</p>
+                    <p>But what if we could put the data query in the
+                        component</p>
+                    <p>I showed something similar during my parse presentation</p>
+                </section>
+
+                <section>
+                    <h2>It's hard to reason about when your render
+                    logic is on your client and your data fetching
+                        logic is on the server</h2>
+                    <p>What fields are getting sent down?</p>
+                    <p>Of that data what are we using in our application?</p>
+                </section>
+
+                <section>
+                    <h2>So how should this work in a perfect
+                        world?</h2>
+                    <p>Put the data fetching logic in the component
+                        and have it be totally self contained</p>
+                </section>
+
+                <section>
+                    <h2>GraphQL</h2>
+                    <p>Data query language</p>
+                    <p>FB's client apps have been using it to describe
+                        their data needs for the past couple years</p>
+                    <p>Query only what you need</p>
+                    <p>Composable, can build queries from other
+                        queries</p>
+                </section>
+
+                <section>
+                    <h2>Relay</h2>
+                    <p>Takes the queries from each compnent in the
+                    tree and builds an overall query and sends that to
+                        the server</p>
+                    <p>Response is put in a single store</p>
+                    <p>One store helps with data consistency and
+                        lessens boilerplate common with Flux</p>
+                </section>
+
+                <section>
+                    <h2>Mutations</h2>
+                    <p>Prior to relay mutation custom endpoints were
+                    set up</p>
+                    <p>Didn't scale well</p>
+                </section>
+
+                <section>
+                    <h2>Mutation requirements</h2>
+                    <ul>
+                        <li>Operation you want to perform</li>
+                        <li>Required inputs</li>
+                        <li>Query for the data you need
+                            post-operation</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Common scenarios built in</h2>
+                    <ul>
+                        <li>Optimistic updates</li>
+                        <li>Error handling</li>
+                        <li>Race conditions</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Deck can be found <a href="https://speakerdeck.com/laneyk/mutations-in-relay">here</a></h3>
+                </section>
+                <!-- Mutations in Relay - Laney Kuenzel: END -->
+			</div>
+
+		</div>
+
+		<script src="/lib/js/head.min.js"></script>
+		<script src="/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '/plugin/zoom-js/zoom.js', async: true },
+					{ src: '/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
