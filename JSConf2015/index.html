@@ -46,7 +46,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>JSConf 2015</h1>
+                    <img src="img/jsconf-2015-logo.png"/>
 					<p>
 						<small>Created by <a href="http://jasondivock.com">Jason Divock</a> / <a href="http://twitter.com/jdivock">@jdivock</a></small>
 					</p>
@@ -61,9 +61,11 @@
                 </section>
 
                 <section>
-                    <h2>They're all over now</h2>
-                    <p>Other satellite conferences</p>
-                    <p>JSConfEU, JSConfBR, JSConfAsia, etc</p>
+                    <img src="img/jsconfAS.png"/>
+                </section>
+
+                <section>
+                    <img src="img/jsconfEU.png"/>
                 </section>
 
                 <section>
@@ -174,7 +176,7 @@ async function printData() {
                 </section>
 
                 <section>
-                    <h2>Beautifully build simulation using HTML5 canvas</h2>
+                    <h2>Beautifully built simulation using HTML5 canvas</h2>
                     <p>If you're curious about building something similar, check out Eloquent Javascript</p>
                 </section>
                 <!-- Cold War - Simon Swain: END -->
@@ -278,7 +280,7 @@ knex.select('*')
                     <p>Transactions</p>
                     <ul>
                         <li>Ability to roll back</li>
-                        <li>Snapshot stae of the world</li>
+                        <li>Snapshot state of the world</li>
                         <li>Prevent others from altering data you're working with</li>
                     </ul>
                 </section>
@@ -320,13 +322,15 @@ var Comment = bookshelf.Model.extend({
                 <!-- Making Relational Cool Again: END -->
 
                 <!-- Marik Kosak = Knitting for JS: BEGIN -->
-                <section>
-                    <h2>Knitting for Javascripters: Mariko Kosak</h2>
+                <section id="knitting">
+                    <h2><a target="_blank"
+                           href="http://kosamari.com/presentation/jsconf-2015/#/1">
+                        Knitting for Javascripters: Mariko Kosak</a></h2>
                     <h4>BKJS in the house</h4>
                 </section>
 
                 <section>
-                    <h2>I met Mariko right before moving out here</h2>
+                    <h4>I met Mariko right before moving out here</h4>
                     <p>Since then she's spoken at a couple borough meetups and helps run BKJS</p>
                     <p>And now she's speaking at JSConf</p>
                     <p>Feeling pretty bad about myself right now</p>
@@ -335,6 +339,7 @@ var Comment = bookshelf.Model.extend({
                 <section>
                     <h2>So right, knitting</h2>
                     <p>Something possesed her to make a JS program to run a semi-automatic knitting machine</p>
+                    <img style="max-width: 60%" src="img/knittingMachine.jpg"/>
                 </section>
 
                 <section>
@@ -342,6 +347,19 @@ var Comment = bookshelf.Model.extend({
                     <p>Knitting machine busted</p>
                     <p>No idea how to perform dithering in 2-tone</p>
                     <p>Bugs in knitting are . . . different</p>
+                </section>
+
+                <section>
+                    <h2>Dithering!</h2>
+                    <img src="img/ditheredcat.png"/>
+                    <pre><code class="javascript">
+gm('cat.jpg').colors(2).dither()
+                    </code></pre>
+                </section>
+
+                <section>
+                    <img src="img/jsconfbefore.jpg"/>
+                    <img src="img/jsconfafter.jpg"/>
                 </section>
 
                 <!-- Marik Kosak = Knitting for JS: END -->
@@ -353,15 +371,15 @@ var Comment = bookshelf.Model.extend({
                 </section>
 
                 <section>
-                    <h2>Neither React nor Flux solve data fetching</h2>
+                    <h4>Neither React nor Flux solve data fetching</h4>
                     <p>Need to prevent scenarios where you're
                         over-fetching</p>
                     <p>Or worse, under-fetching and your page explodes</p>
                 </section>
 
                 <section>
-                    <h3>The current react structure has implementation
-                    details of components leaking to their parents</h3>
+                    <h5>The current react structure has implementation
+                    details of components leaking to their parents</h5>
                     <p>Changing a child neccessitates modiying all
                         relevant parents</p>
                     <p>But what if we could put the data query in the
@@ -370,16 +388,16 @@ var Comment = bookshelf.Model.extend({
                 </section>
 
                 <section>
-                    <h2>It's hard to reason about when your render
+                    <h5>It's hard to reason about when your render
                     logic is on your client and your data fetching
-                        logic is on the server</h2>
+                        logic is on the server</h5>
                     <p>What fields are getting sent down?</p>
                     <p>Of that data what are we using in our application?</p>
                 </section>
 
                 <section>
-                    <h2>So how should this work in a perfect
-                        world?</h2>
+                    <h4>So how should this work in a perfect
+                        world?</h4>
                     <p>Put the data fetching logic in the component
                         and have it be totally self contained</p>
                 </section>
@@ -435,7 +453,7 @@ var Comment = bookshelf.Model.extend({
 
                 <!--Recreating a Dialup Modem in JS: Saccone: START -->
                 <section id="modem">
-                    <h2><a target="_blank" href="http://slides.com/samccone/jsconf-us/#/">Recreating a Dialup Modem in JS</a></h2>
+                    <h3><a target="_blank" href="http://slides.com/samccone/jsconf-us/#/">Recreating a Dialup Modem in JS</a></h3>
                     <h4>Sam Saccone</h4>
                 </section>
 
@@ -447,8 +465,8 @@ var Comment = bookshelf.Model.extend({
                 </section>
 
                 <section>
-                    <h2>Used to have to be directly connected to the
-                        other party</h2>
+                    <h4>Used to have to be directly connected to the
+                        other party</h4>
                     <p>Doesn't scale well</p>
                     <p>Multiplex sending info</p>
                 </section>
@@ -466,7 +484,7 @@ var Comment = bookshelf.Model.extend({
                 </section>
 
                 <section>
-                    <h2>How do we get from a wave to frequency intensity?</h2>
+                    <h4>How do we get from a wave to frequency intensity?</h4>
                     <p>Goertzel Algorithm - this is an algorithm for
                         extracting a single frequency.</p>
                     <p>You tell it the frequency you're looking for
@@ -512,14 +530,14 @@ var Comment = bookshelf.Model.extend({
 
                 <!-- ES6: Ashely Williams: BEGIN -->
                 <section>
-                    <h2>
+                    <h4>
                         <a
                 href="http://ashleygwilliams.github.io/jsconf-2015-deck/#1"
                 target="_blank">
                             If you wish to learn ES6/2015 from
                             scratch, you must first invent the universe
                         </a>
-                    </h2>
+                    </h4>
                     <h4>Ashley Williams</h4>
                 </section>
 
@@ -628,7 +646,18 @@ a11y('cnn.com', function (err, reports) {
     });
                         </code>
                     </pre>
+                </section>
                 <!-- Automated accessibility testing: END -->
+
+                <section>
+                    <h4>Did I mention this was at the beach?</h4>
+                    <img src="img/beach.jpg"/>
+                </section>
+
+                <section>
+                    <h4>So yeah, you should go</h4>
+                    <h5>And submit to speak</h5>
+                </section>
 
 			</div>
 
