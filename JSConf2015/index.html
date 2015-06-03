@@ -66,6 +66,12 @@
                     <p>JSConfEU, JSConfBR, JSConfAsia, etc</p>
                 </section>
 
+                <section>
+                    <h2>I'm about to cram a crapton of content into
+                        some slides</h2>
+                    <h4>Bear with me</h4>
+                </section>
+
                 <!-- ES2016 Jafar: BEGIN -->
                 <section>
                     <h2>Jafar Husain: Async Programming in ES7</h2>
@@ -342,7 +348,7 @@ var Comment = bookshelf.Model.extend({
 
                 <!-- Mutations in Relay - Laney Kuenzel: START -->
                 <section id="relay">
-                    <h2>Mutations in Relay</h2>
+                    <h2><a target="_blank" href="https://speakerdeck.com/laneyk/mutations-in-relay">Mutations in Relay</a></h2>
                     <h4>Laney Kuenzel</h4>
                 </section>
 
@@ -424,19 +430,205 @@ var Comment = bookshelf.Model.extend({
                     </ul>
                 </section>
 
-                <section>
-                    <h3>Deck can be found <a href="https://speakerdeck.com/laneyk/mutations-in-relay">here</a></h3>
-                </section>
                 <!-- Mutations in Relay - Laney Kuenzel: END -->
 
 
                 <!--Recreating a Dialup Modem in JS: Saccone: START -->
-                <section id="dialup">
-                    <h2><a href="http://slides.com/samccone/jsconf-us/#/">Recreating a Dialup Modem in JS</a></h2>
+                <section id="modem">
+                    <h2><a target="_blank" href="http://slides.com/samccone/jsconf-us/#/">Recreating a Dialup Modem in JS</a></h2>
                     <h4>Sam Saccone</h4>
                 </section>
 
+                <section>
+                    <h2>History lesson time</h2>
+                    <p>Telegraphy</p>
+                    <p>Morse code</p>
+                    <p>Baudot Code</p>
+                </section>
+
+                <section>
+                    <h2>Used to have to be directly connected to the
+                        other party</h2>
+                    <p>Doesn't scale well</p>
+                    <p>Multiplex sending info</p>
+                </section>
+
+                <section>
+                    <h2>TTY</h2>
+                    <img src="./img/tty.jpg"/>
+                    <p>Allows non-skilled operators</p>
+                </section>
+
+                <section>
+                    <h2>Why did we go this route?</h2>
+                    <p>Everyone had a phone line</p>
+                    <p>Worked with what we had</p>
+                </section>
+
+                <section>
+                    <h2>How do we get from a wave to frequency intensity?</h2>
+                    <p>Goertzel Algorithm - this is an algorithm for
+                        extracting a single frequency.</p>
+                    <p>You tell it the frequency you're looking for
+                        and it tells you the intensity.</p>
+                    <p>Not quite perfect...</p>
+                </section>
+
+                <section>
+                    <h2>Demo Time</h2>
+                    <p>Strings -> Binary</p>
+                    <p>Binary -> Audio</p>
+                </section>
+
+                <section>
+                    <h2>Demo Time</h2>
+                    <p>Adding static to the line</p>
+                    <p>Increasing baud</p>
+                    <p>Added multiplexing</p>
+                </section>
+
+                <section>
+                    <h2><a href="https://github.com/samccone/noise"
+                           target="_blank">Code</a></h2>
+                </section>
                 <!--Recreating a Dialup Modem in JS: Saccone: END -->
+
+                <!-- Visualizing process evolugion: START -->
+                <section>
+                    <h2>Visualizing process evolution</h2>
+                    <h4>Dann Toliver</h4>
+                </section>
+
+                <section>
+                    <h2>Yeah, this was kinda bonkers and deep</h2>
+                    <h4><a href="http://bentodojo.com/underview/" target="_blank">
+                        Here's some pictures</a></h4>
+                    <h4><a href="https://github.com/dxnn/underview"
+                           target="_blank">
+                        Underview</a>
+                    </h4>
+                </section>
+                <!-- Visualizing process evolugion: END -->
+
+                <!-- ES6: Ashely Williams: BEGIN -->
+                <section>
+                    <h2>
+                        <a
+                href="http://ashleygwilliams.github.io/jsconf-2015-deck/#1"
+                target="_blank">
+                            If you wish to learn ES6/2015 from
+                            scratch, you must first invent the universe
+                        </a>
+                    </h2>
+                    <h4>Ashley Williams</h4>
+                </section>
+
+                <section>
+                    <h2>ES6 Abstractions</h2>
+                    <p>Solid talk on what they are and why we need them</p>
+                </section>
+
+                <section>
+                    <h4>"Programs must be written for people to read,
+                    and only incidentally for machines to execute" --
+                        Abelson and Sussman</h4>
+                </section>
+
+                <section>
+                    <h2>Downside to syntatic sugar</h2>
+                    <p>We should understand what our language is doing
+                        under the hood</p>
+                    <p>SICP</p>
+                    <p>DTM</p>
+                </section>
+
+                <section>
+                    <h2>Say what you will about JS</h2>
+                    <h4>It keeps us close to the language</h4>
+                </section>
+                <!-- ES6: Ashely Williams: END -->
+
+                <!-- BABEL TALK: START -->
+                <section>
+                    <h2><a
+                href="https://speakerdeck.com/sebmck/javascript-transformation-jsconf-2015"
+                target="_blank">Javascript Transformation</a></h2>
+                    <h4>Sebastian McKenzie</h4>
+                </section>
+
+                <section>
+                    <h2>Babel</h2>
+                    <h4>Not just a shit show of RegExs</h4>
+                    <ul>
+                        <li>Move code into AST</li>
+                        <li>Manipulate AST</li>
+                        <li>Turn AST back into usable code</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Limitations</h2>
+                    <ul>
+                        <li>Can't prevent new'ing arrow functions</li>
+                        <li>No nice way to prevent access to
+                            prototype</li>
+                        <li>IE8 Fucks everything up (surprise).</li>
+                    </ul>
+                    <p>Better off with experimental flags when
+                        possible</p>
+                </section>
+
+                <section>
+                    <h2><a
+                    href="https://gist.github.com/sebmck/6760f024034c79fb2012"
+                    target="_blank">EMOJI TRANSFORMER</a></h2>
+                </section>
+                <!-- BABEL TALK: END -->
+
+                <!-- Automated accessibility testing: START -->
+                <section id="a11y">
+                    <h2><a target="_blank" href="http://marcysutton.github.io/a11y-automated-testing/#/">The Magic of Automated Accessibility
+                        Testing</a></h2>
+                    <h4>Marcy Sutton</h4>
+                </section>
+
+                <section>
+                    <h2>Did not know about this</h2>
+                    <img src="img/a11y.jpg"/>
+                </section>
+
+                <section>
+                    <h2>Via script</h2>
+                    <pre><code class="javascript hljs">
+var a11y = require('a11y');
+
+a11y('cnn.com', function (err, reports) {
+   var report = reports.report;
+   console.log(report);
+});
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Integration tests</h2>
+                    <pre>
+                        <code class="javascript">
+ describe('bottom sheet view', function() {
+  beforeEach(function() {
+    // click on share button
+    element(by.css('button.share')).click();
+  });
+
+  it('should focus on the first item', function() {
+    // verify focus was sent into bottom sheet
+    element.all(by.css('[ng-click="vm.performAction(item)"]'))
+      .then(function(items) {
+        expect(items[0].getAttribute('id'))
+          .toEqual(browser.driver.switchTo().activeElement().getAttribute('id'));
+    });
+                        </code>
+                    </pre>
+                <!-- Automated accessibility testing: END -->
 
 			</div>
 
