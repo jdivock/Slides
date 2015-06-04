@@ -144,22 +144,52 @@ async function printData() {
                 </section>
 
                 <section>
-                    <h2>When awaiting values to return</h2>
-                    <pre>
-                        <code data-trim>
-    // Example Generator
-    function* getKeyFrames(video) {
-        var allFrames = yield getFrames(video);
-        var keyFrames = yield filterKeys(allFrames);
-        return keyFrames;
-    }
-                        </code>
-                    </pre>
+                    <table><thead>
+                        <tr>
+                            <th></th>
+                            <th align="center">Sync</th>
+                            <th align="center">Async</th>
+                        </tr>
+                    </thead><tbody>
+                        <tr>
+                            <td>function</td>
+                            <td align="center">T</td>
+                            <td align="center">Promise</td>
+                        </tr>
+                        <tr>
+                            <td>function*</td>
+                            <td align="center">Iterator</td>
+                            <td align="center">???</td>
+                        </tr>
+                    </tbody></table>
+                </section>
+
+                <section>
+                    <pre><code class="javascript">
+async function *getStockPrices(stockName, currency) {
+  for(var price on getPrices(await getStockSymbol(stockName))) {
+    yield convert(price, currency);
+  }
+}
+
+// What type is prices?
+var prices = getStockPrices("JNJ", "CAN");
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Bam, observables</h2>
+                    <p>Push values as they come in</p>
                 </section>
 
                 <section>
                     <h2>Oof, that was rough, here's his proposal</h2>
                     <p>https://github.com/jhusain/asyncgenerator</p>
+                </section>
+
+                <section>
+                    <h2>And the full version of the talk</h2>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/DqMFX91ToLw" frameborder="0" allowfullscreen></iframe>
                 </section>
                 <!-- ES2016 Jafar: END -->
 
@@ -188,7 +218,7 @@ async function printData() {
                 </section>
 
                 <section>
-                    <h2>Native was built with solving application problems in mind</h2>
+                    <h3>Native was built with solving application problems in mind</h3>
                     <h4>The web wasn't</h4>
                 </section>
 
@@ -338,7 +368,7 @@ var Comment = bookshelf.Model.extend({
 
                 <section>
                     <h2>So right, knitting</h2>
-                    <p>Something possesed her to make a JS program to run a semi-automatic knitting machine</p>
+                    <p>Something possesed her to use JS to run a semi-automatic knitting machine</p>
                     <img style="max-width: 60%" src="img/knittingMachine.jpg"/>
                 </section>
 
@@ -380,11 +410,13 @@ gm('cat.jpg').colors(2).dither()
                 <section>
                     <h5>The current react structure has implementation
                     details of components leaking to their parents</h5>
-                    <p>Changing a child neccessitates modiying all
-                        relevant parents</p>
-                    <p>But what if we could put the data query in the
-                        component</p>
-                    <p>I showed something similar during my parse presentation</p>
+                    <ul>
+                    <li>Changing a child neccessitates modiying all
+                        relevant parents</li>
+                    <li>But what if we could put the data query in the
+                        component</li>
+                    <li>I showed something similar during my parse presentation</li>
+                    </ul>
                 </section>
 
                 <section>
@@ -404,22 +436,26 @@ gm('cat.jpg').colors(2).dither()
 
                 <section>
                     <h2>GraphQL</h2>
-                    <p>Data query language</p>
-                    <p>FB's client apps have been using it to describe
-                        their data needs for the past couple years</p>
-                    <p>Query only what you need</p>
-                    <p>Composable, can build queries from other
-                        queries</p>
+                    <ul>
+                    <li>Data query language</li>
+                    <li>FB's client apps have been using it to describe
+                        their data needs for the past couple years</li>
+                    <li>Query only what you need</li>
+                    <li>Composable, can build queries from other
+                        queries</li>
+                    </ul>
                 </section>
 
                 <section>
                     <h2>Relay</h2>
-                    <p>Takes the queries from each compnent in the
+                    <ul>
+                    <li>Takes the queries from each compnent in the
                     tree and builds an overall query and sends that to
-                        the server</p>
-                    <p>Response is put in a single store</p>
-                    <p>One store helps with data consistency and
-                        lessens boilerplate common with Flux</p>
+                        the server</li>
+                    <li>Response is put in a single store</li>
+                    <li>One store helps with data consistency and
+                        lessens boilerplate common with Flux</li>
+                    </ul>
                 </section>
 
                 <section>
@@ -493,7 +529,8 @@ gm('cat.jpg').colors(2).dither()
                 </section>
 
                 <section>
-                    <h2>Demo Time</h2>
+                    <h2><a href="https://github.com/samccone/noise"
+                           target="_blank">Demo Time</a></h2>
                     <p>Strings -> Binary</p>
                     <p>Binary -> Audio</p>
                 </section>
@@ -505,10 +542,6 @@ gm('cat.jpg').colors(2).dither()
                     <p>Added multiplexing</p>
                 </section>
 
-                <section>
-                    <h2><a href="https://github.com/samccone/noise"
-                           target="_blank">Code</a></h2>
-                </section>
                 <!--Recreating a Dialup Modem in JS: Saccone: END -->
 
                 <!-- Visualizing process evolugion: START -->
@@ -658,6 +691,18 @@ a11y('cnn.com', function (err, reports) {
                     <h4>So yeah, you should go</h4>
                     <h5>And submit to speak</h5>
                 </section>
+
+                <section>
+                    <h3>Other take aways</h3>
+                    <ul>
+                        <li>Yep, other shops have their issues
+                            too</li>
+                        <li>People are building amazing shit in their
+                            spare time and you should be too</li>
+                        <li>No one will shut the fuck up about
+                            react</li>
+                        <li>JS is more than just pooping out new frameworks</li>
+                    </ul>
 
 			</div>
 
