@@ -1,3 +1,3 @@
 # Just my deck
 
-Viewable @ https://slides.jdivock.com
+Viewable @ http://slides.jdivock.com
