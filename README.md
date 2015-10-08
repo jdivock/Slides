@@ -1,3 +1,3 @@
-# Just my slides for presentations at meetups and at work and whatnot
+# Just my deck
 
-Hosted a https://slides.jdivock.com
+Viewable @ http://slides.jdivock.com
