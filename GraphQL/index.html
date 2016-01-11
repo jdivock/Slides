@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+    <title>GraphQL</title>
+
+		<meta name="description" content="GraphQL">
+		<meta name="author" content="Jason Divock">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="/css/reveal.css">
+		<link rel="stylesheet" href="/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="index.css">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="/lib/css/zenburn.css">
+
+        <style>
+            dt, dd { float: left }
+            dt { clear:both }
+        </style>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '/css/print/pdf.css' : '/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>GraphQL</h1>
+          <h3>A Data Query Language And Runtime</h3>
+					<p>
+						<small>Created by <a href="http://jasondivock.com">Jason Divock</a> / <a href="http://twitter.com/jdivock">@jdivock</a></small>
+					</p>
+				</section>
+
+        <!-- OVERVIEW: START -->
+        <section>
+          <h2>The Problem with REST</h2>
+          <p>We've all been there before, the API gets us close but we still need to shape or request and join further on our own</p>
+          <p>On one hand we know this isn't the responsibility of the View, on the other hand this needs to get done. So we code it up anyways</p>
+        </section>
+
+        <section>
+          <h2>What it do</h2>
+          <p>"A query language created by Facebook for describing data requirements on complex application data models"</p>
+        </section>
+
+        <section>
+          <h2>Key Tenants</h2>
+          <ul>
+            <li class="fragment">Declarative</li>
+            <li class="fragment">Compositional</li>
+            <li class="fragment">Strong-Typed</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Declarative</h2>
+          <p>Query responses are decided by the client rather than the server. A GraphQL query returns exactly what a client asks for and no more.</p>
+        </section>
+
+        <section>
+          <h2>Comopsitional</h2>
+          <p>A GraphQL query itself is a hierarchical set of fields. The query is shaped just like the data it returns. It is a natural way for product engineers to describe data requirements.</p>
+        </section>
+
+        <section>
+          <h2>Strong-Typed</h2>
+          <p>A GraphQL query can be ensured to be valid within a GraphQL type system at development time allowing the server to make guarantees about the response. This makes it easier to build high-quality client tools.</p>
+        </section>
+        <!-- OVERVIEW: END -->
+
+        <section class="shape query-result">
+          <h2>What does it actually look like?</h2>
+          <pre><code class="js">
+{
+  user(id: 3500401) {
+    id,
+    name,
+    isViewerFriend,
+    profilePicture(size: 50)  {
+     uri,
+     width,
+     height
+    }
+  }
+}
+          </code>
+          </pre>
+          <pre><code class="json">
+{
+  "user" : {
+    "id": 3500401,
+    "name": "Jing Chen",
+    "isViewerFriend": true,
+    "profilePicture": {
+       "uri": "http://someurl.cdn/pic.jpg",
+       "width": 50,
+       "height": 50
+    }
+  }
+}
+          </code>
+          </pre>
+        </section>
+
+        <section>
+          <img src="img/graphqlRest.png" alt="graphql vs REST"/>
+        </section>
+
+
+        <section>
+          <h2>Design Principles</h2>
+          <ul>
+            <li class="fragment">Hierarchical</li>
+            <li class="fragment">Product-centric</li>
+            <li class="fragment">Client-specified queries</li>
+            <li class="fragment">Backwards Compatible</li>
+            <li class="fragment">Structured, Arbitrary Code</li>
+            <li class="fragment">Application-layer Protocol</li>
+            <li class="fragment">Strongly-typed</li>
+            <li class="fragment">Introspective</li>
+          </ul>
+
+          <aside class="notes">
+            <ul>
+              <li>Hierarchical: Most product development today involves the creation and manipulation of view hierarchies. To achieve congruence with the structure of these applications, a GraphQL query itself is a hierarchical set of fields. The query is shaped just like the data it returns. It is a natural way for product engineers to describe data requirements.</li>
+
+              <li>Product-centric: GraphQL is unapologetically driven by the requirements of views and the front-end engineers that write them. We start with their way of thinking and requirements and build the language and runtime necessary to enable that.</li>
+
+                  <li>Client-specified queries: In GraphQL, the specification for queries are encoded in the client rather than the server. These queries are specified at field-level granularity. In the vast majority of applications written without GraphQL, the server determines the data returned in its various scripted endpoints. A GraphQL query, on the other hand, returns exactly what a client asks for and no more.</li>
+
+                  <li>Backwards Compatible: In a world of deployed native mobile applications with no forced upgrades, backwards compatibility is a challenge. Facebook, for example, releases apps on a two week fixed cycle and pledges to maintain those apps for at least two years. This means there are at a minimum 52 versions of our clients per platform querying our servers at any given time. Client-specified queries simplifies managing our backwards compatibility guarantees.</li>
+
+                  <li>Structured, Arbitrary Code: Query languages with field-level granularity have typically queried storage engines directly, such as SQL. GraphQL instead imposes a structure onto a server, and exposes fields that are backed by arbitrary code. This allows for both server-side flexibility and a uniform, powerful API across the entire surface area of an application.</li>
+
+                  <li>Application-Layer Protocol: GraphQL is an application-layer protocol and does not require a particular transport. It is a string that is parsed and interpreted by a server.</li>
+
+                  <li>Strongly-typed: GraphQL is strongly-typed. Given a query, tooling can ensure that the query is both syntactically correct and valid within the GraphQL type system before execution, i.e. at development time, and the server can make certain guarantees about the shape and nature of the response. This makes it easier to build high quality client tools.</li>
+
+                  <li>Introspective: GraphQL is introspective. Clients and tools can query the type system using the GraphQL syntax itself. This is a powerful platform for building tools and client software, such as automatic parsing of incoming data into strongly-typed interfaces. It is especially useful in statically typed languages such as Swift, Objective-C and Java, as it obviates the need for repetitive and error-prone code to shuffle raw, untyped JSON into strongly-typed business objects.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <!-- GRAPHQL VS REST: START -->
+        <section>
+          <h3>GraphQL vs REST</h3>
+          <p>Fetching complicated object graphs requires multiple round trips</p>
+
+          <p>This is results in a Not Premium™ roundtrip times (exacerbated in mobile)</p>
+        </section>
+
+        <section>
+          <h3>GraphQL vs REST</h3>
+          <p>As fields are added to the endpoint, old clients begin recieving them whether they want them or not</p>
+
+          <ul>
+            <li>Overlay versionining system on top of REST (gross)</li>
+            <li>Have "compact" vs "full" responses to endpoints (grosser)</li>
+          </ul>
+
+          <aside class="notes">
+            Invariably fields and additional data are added to REST endpoints as the system requirements change. However, old clients also receive this additional data as well, because the data fetching specification is encoded on the server rather than the client. As result, these payloads tend to grow over time for all clients. When this becomes a problem for a system, one solution is to overlay a versioning system onto the REST endpoints. Versioning also complicates a server, and results in code duplication, spaghetti code, or a sophisticated, hand-rolled infrastructure to manage it. Another solution to limit over-fetching is to provide multiple views – such as “compact” vs “full” – of the same REST endpoint, however this coarse granularity often does not offer adequate flexibility.
+          </aside>
+        </section>
+
+        <section>
+          <h3>GraphQL vs REST</h3>
+
+          <p>Weakly typed, making you reliant on documentation rather than code and tooling</p>
+        </section>
+
+        <section>
+          <h3>GraphQL vs REST</h3>
+
+          <p>"REST is intended for long-lived network-based applications that span multiple organizations"</p>
+          <p>(not a requirement for APIs that serve a client app built in house)</p>
+        </section>
+
+
+        <section>
+          <h3>GraphQL vs REST</h3>
+
+          <p>Things get nasty over time. Over-fetching begins rearing it's head and to combat multiple round-trips we begin developing ad-hoc endpoints, violating the main principle behind REST</p>
+        </section>
+        <!-- GRAPHQL VS REST: END -->
+
+
+        <!-- GRAPHQL VS ADHOC: START -->
+        <section>
+          <h3>GraphQL vs Ad-Hoc Endpoints</h3>
+
+          <p>Can easily grow out of control, as custom endpoints get built for specific views existing endpoints quickly get abandoned and orphaned</p>
+        </section>
+
+        <section>
+          <h3>GraphQL vs Ad-Hoc Endpoints</h3>
+
+          <p>Much like REST, endpoints continually grow to preserve backwards compatibility resulting in over-fetching</p>
+        </section>
+
+        <section>
+          <h3>GraphQL vs Ad-Hoc Endpoints</h3>
+
+          <p>Clunky development process. Adding a new field requires a developer adding a new field to the API, waiting for merge and deployment, then returning to their client code to then make use of the new field</p>
+
+          <p>In GraphQL, as long as the field is not completely new to the Data Schema, you simply add it to the query</p>
+        </section>
+        <!-- GRAPHQL VS ADHOC: END -->
+
+
+        <section>
+          <h2>Alright, everyone sold? Let's get into it</h2>
+        </section>
+
+
+        <!-- TYPE SYSTEM: START -->
+        <section>
+          <h3>Type System (graphql)</h3>
+          <h5>ApeShitFuckJacked Returns!</h5>
+
+          <pre>
+          <code class="js">
+type Lift {
+  id: UUID,
+  reps: Integer,
+  sets: Integer,
+  weight: Float,
+  name: String
+}
+          </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Type System (graphql-js)</h3>
+
+          <pre>
+          <code class="js">
+const Lift = new GraphQLObjectType({
+  name: 'Lift',
+  fields: () => ({
+    id: {
+      type: GraphQLID
+    },
+    reps: {
+      type: GraphQLInt
+    },
+    sets: {
+      type: GraphQLInt
+    },
+    weight: {
+      type: GraphQLFloat
+    },
+    name: {
+      type: GraphQLString
+    }
+  })
+})
+          </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Type System (graphql)</h3>
+
+          <pre>
+          <code class="js">
+type Account {
+  id: UUID,
+  name: String,
+  email: String,
+  workouts: [Workout]
+}
+
+type Workout {
+  id: UUID,
+  date: Integer,
+  name: String
+  lifts: [Lift]
+}
+
+type Lift {
+  id: UUID,
+  reps: Integer,
+  sets: Integer,
+  weight: Float,
+  name: String
+}
+          </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Type System (graphql-js)</h3>
+
+          <pre>
+          <code class="js">
+const Account = new GraphQLObjectType({
+  name: 'Account',
+  fields: () => ({
+    id: {
+      type: GraphQLID
+    },
+    name: {
+      type: GraphQLString
+    },
+    email: {
+      type: GraphQLString
+    },
+    workouts: {
+      type: new GraphQLList(Workout)
+    }
+  })
+});
+
+const Workout = new GraphQLObjectType({
+  name: 'Workout',
+  fields: () => ({
+    id: {
+      type: GraphQLID
+    },
+    date: {
+      type: GraphQLInt
+    },
+    name: {
+      type: GraphQLString
+    },
+    lifts: {
+      type: new GraphQLList(Lift)
+    }
+  })
+});
+
+const Lift = new GraphQLObjectType({
+  name: 'Lift',
+  fields: () => ({
+    id: {
+      type: GraphQLID
+    },
+    reps: {
+      type: GraphQLInt
+    },
+    sets: {
+      type: GraphQLInt
+    },
+    weight: {
+      type: GraphQLFloat
+    },
+    name: {
+      type: GraphQLString
+    }
+  })
+})
+          </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Type System (graphql)</h3>
+
+          <p>This is cool and all but we need to actually query stuff, we need an entry point</p>
+        </section>
+
+        <section>
+          <h3>Type System (graphql)</h3>
+
+          <pre>
+          <code class="js">
+type Query {
+  account(email: String!): Account,
+  workout(id: Integer!}: Workout,
+  lift(id: Integer!}: Lift
+}
+          </code>
+          </pre>
+        </section>
+
+        <section>
+          <h3>Type System (graphql-js)</h3>
+
+          <pre>
+          <code class="js">
+const Query = new GraphQLObjectType({
+  name: 'Query',
+  fields: () => ({
+    account: {
+      type: Account,
+      args: {
+        email: {
+          type: new GraphQLNonNull(GraphQLString)
+        }
+      }
+    },
+    workout: {
+      type: Workout,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      }
+    },
+    lift: {
+      type: Lift,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      }
+    }
+  })
+});
+          </code>
+          </pre>
+        </section>
+        <!-- TYPE SYSTEM: END -->
+
+        <!-- QUERIES: START -->
+        <section class="query-result">
+          <h3>Queries</h3>
+
+          <pre>
+          <code class="js">
+query AccountQuery {
+  account {
+    name
+  }
+}
+
+
+          </code>
+          </pre>
+          <pre>
+          <code class="json">
+{
+  "data": {
+    "account": {
+      "name": "Joey Joe Joe"
+    }
+  }
+}
+          </code>
+          </pre>
+        </section>
+
+        <section class="query-result">
+          <h3>Queries</h3>
+
+          <pre>
+          <code class="js">
+{
+  account {
+    name,
+    email,
+    workouts {
+      id,
+      date
+  }
+}
+
+
+          </code>
+          </pre>
+          <pre>
+          <code class="json">
+{
+  "data": {
+    "account": {
+      "name": "Joey Joe Joe",
+      "email": "joe@joe.com",
+      "workouts": [
+        {
+          "id": 1001,
+          "date": "2015-01-02"
+        },
+        {
+          "id": 1002,
+          "date": "2015-02-01"
+        }
+      ]
+    }
+  }
+}
+          </code>
+          </pre>
+        </section>
+
+        <section class="query-result">
+          <h3>Queries</h3>
+
+          <pre>
+          <code class="js">
+{
+  account(email: "joe@joe.com") {
+    name,
+    email
+  }
+}
+
+
+          </code>
+          </pre>
+          <pre>
+          <code class="json">
+{
+  "data": {
+    "account": {
+      "name": "Joey Joe Joe",
+      "email": "joe@joe.com",
+    }
+  }
+}
+          </code>
+          </pre>
+        </section>
+
+        <section class="query-result">
+          <h3>Queries</h3>
+
+          <pre>
+          <code class="js">
+{
+  joe: account(email: "joe@joe.com") {
+    name,
+    email
+  },
+  bob: account(email: "bob@bob.com") {
+    name,
+    email
+  },
+}
+
+
+          </code>
+          </pre>
+          <pre>
+          <code class="json">
+{
+  "data": {
+    "joe": {
+      "name": "Joey Joe Joe",
+      "email": "joe@joe.com",
+    },
+    "bob": {
+      "name": "Bob Boberson"
+      "email": "bob@bob.com",
+    }
+  }
+}
+          </code>
+          </pre>
+        </section>
+
+        <!-- QUERIES: END -->
+
+        <!-- VALIDATION: START -->
+        <section class="query-result">
+          <h3>Validation</h3>
+
+          <pre>
+          <code class="js">
+{
+    account {
+          id
+            }
+}
+          </code>
+          </pre>
+          <pre>
+          <code class="json">
+{
+    "errors": [
+        {
+            "message": "Field \"account\" argument \"id\" of type \"ID!\" is required but not provided.",
+                  "locations": [
+                    {
+                      "line": 16,
+                      "column": 3
+                    }
+                    ]
+        }
+    ]
+}
+          </code>
+          </pre>
+        </section>
+        <!-- VALIDATION: END -->
+
+        <!-- INTROSPECTION: START -->
+        <section>
+          <h3>Introspection</h3>
+          <pre>
+          <code class="json">
+{
+  __schema {
+      types {
+            kind
+            name
+            description
+      }
+    }
+}
+          </code>
+          </pre>
+        </section>
+        <!-- INTROSPECTION: END -->
+
+        <section>
+          <h2>Required Parts</h2>
+
+          <ul>
+            <li>Web Server (Express, Hapi has a driver as well)</li>
+            <li>Data Source (Postgres)</li>
+            <li>GraphQL Schema</li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h2>Demo Time</h2>
+          <img alt="liftql" src="img/liftql.png"/>
+        </section>
+
+        <section>
+          <h2>Relay</h2>
+          <p>It's easier to show a picture than to try to explain things</p>
+          <p><a target="_blank" href="http://sgwilym.github.io/relay-visual-learners/">Relay For Visual Learners</a></p>
+        </section>
+
+        <section>
+          <h2>Getting from a GraphQL Server to a Relay GraphQL Server</h2>
+          <ol>
+            <li>A mechanism for refetching an object.</li>
+            <li>A description of how to page through connections.</li>
+            <li>Structure around mutations to make them predictable.</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2>Object Identification</h2>
+
+          <pre>
+          <code class="js">
+fields: () => ({
+  id: globalIdField('Lift'),
+  ...
+          </code>
+          </pre>
+
+          <pre>
+          <code class="js">
+var {type, id} = fromGlobalId(globalId);
+if (type === 'Lift') {
+  return getLift(id);
+} else if (type === 'Account') {
+...
+          </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Connections</h2>
+
+          <pre>
+          <code class="js">
+var {
+  connectionType: WorkoutConnection,
+} = connectionDefinitions({
+  name: 'Workout',
+  nodeType: Workout,
+});
+          </code>
+          </pre>
+
+          <pre>
+          <code class="js">
+workouts: {
+  type: WorkoutConnection,
+  args: connectionArgs,
+  resolve: (account, args) => connectionFromPromisedArray(
+      knex('workout').where({ userid: account.id }),
+      args
+      )
+},
+          </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>Consistent Mutations</h2>
+
+          <p>All mutations now take a single input param</p>
+
+          <p>Return a clientMutationId to reconcile requets and responses</p>
+        </section>
+
+        <section>
+          <h2>Shit is hairy yo</h2>
+          <pre>
+          <code class="js">
+mutation AddLiftMutation($input: AddLiftMutationInput!) {
+    addLiftMutation(input: $input) {
+    newLift {
+      id,
+      weight,
+      sets
+    },
+    clientMutationId
+  }
+}
+
+{
+  "input": {
+    "workoutid": "V29ya291dDox",
+    "sets": 1,
+    "reps": 2,
+    "weight": 100,
+    "name": "stuff",
+    "clientMutationId": 0
+  }
+}
+          </code>
+          </pre>
+        </section>
+
+        <section>
+          <h2>More Demos</h2>
+        </section>
+
+        <section>
+          <h2>How does it interact with react?</h2>
+
+          <img alt="relay" src="./img/relay.png"/>
+        </section>
+
+        <!-- Questions? -->
+        <section>
+          <h2>Questions?</h2>
+        </section>
+
+        <section>
+          <h2>GraphQL, A Horizontal Platform – @Scale</h2>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/_9RgHXqH8J0" frameborder="0"></iframe>
+        </section>
+
+        <section>
+          <h2>Creating a GraphQL Server</h2>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/gY48GW87Feo" frameborder="0"></iframe>
+        </section>
+
+        <section>
+          <h2>Links</h2>
+          <p><a href="http://facebook.github.io/graphql/">GraphQL Spec</a></p>
+          <p><a href="http://github.com/facebook/graphql/">GraphQL Spec (github)</a></p>
+          <p><a href="https://facebook.github.io/react/blog/2015/05/01/graphql-introduction.html">React Blog: GraphQL Introduction</a></p>
+          <p><a href="http://graphql-swapi.parseapp.com/graphiql/">Graph<i>i</i>QL: In browswer GraphQL IDE</a></p>
+          <p><a href="https://www.youtube.com/watch?v=9sc8Pyc51uU">Reactjs Conf2015: Data Fetching for React Applications</a></p>
+          <p><a href="https://code.facebook.com/posts/1691455094417024/graphql-a-data-query-language/">GraphQL: A data Query Language</a></p>
+          <p><a href="http://blog.startifact.com/posts/graphql-and-rest.html">GraphQL and REST</a></p>
+          <p><a href="https://medium.com/@clayallsopp/your-first-graphql-server-3c766ab4f0a2a">Your First GraphQL Server</a></p>
+          <p><a href="https://blog.risingstack.com/graphql-overview-getting-started-with-graphql-and-nodejs/">GraphQL Overview - Getting Started with GraphQL and Node.js</a></p>
+        </section>
+			</div>
+
+		</div>
+
+		<script src="/lib/js/head.min.js"></script>
+		<script src="/js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: '/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '/plugin/zoom-js/zoom.js', async: true },
+					{ src: '/plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

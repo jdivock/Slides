@@ -46,7 +46,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>JSConf 2015</h1>
+                    <img src="img/jsconf-2015-logo.png"/>
 					<p>
 						<small>Created by <a href="http://jasondivock.com">Jason Divock</a> / <a href="http://twitter.com/jdivock">@jdivock</a></small>
 					</p>
@@ -61,9 +61,17 @@
                 </section>
 
                 <section>
-                    <h2>They're all over now</h2>
-                    <p>Other satellite conferences</p>
-                    <p>JSConfEU, JSConfBR, JSConfAsia, etc</p>
+                    <img src="img/jsconfAS.png"/>
+                </section>
+
+                <section>
+                    <img src="img/jsconfEU.png"/>
+                </section>
+
+                <section>
+                    <h2>I'm about to cram a crapton of content into
+                        some slides</h2>
+                    <h4>Bear with me</h4>
                 </section>
 
                 <!-- ES2016 Jafar: BEGIN -->
@@ -136,22 +144,54 @@ async function printData() {
                 </section>
 
                 <section>
-                    <h2>When awaiting values to return</h2>
-                    <pre>
-                        <code data-trim>
-    // Example Generator
-    function* getKeyFrames(video) {
-        var allFrames = yield getFrames(video);
-        var keyFrames = yield filterKeys(allFrames);
-        return keyFrames;
-    }
-                        </code>
-                    </pre>
+                    <table><thead>
+                        <tr>
+                            <th></th>
+                            <th align="center">Sync</th>
+                            <th align="center">Async</th>
+                        </tr>
+                    </thead><tbody>
+                        <tr>
+                            <td>function</td>
+                            <td align="center">T</td>
+                            <td align="center">Promise</td>
+                        </tr>
+                        <tr>
+                            <td>function*</td>
+                            <td align="center">Iterator</td>
+                            <td align="center">???</td>
+                        </tr>
+                    </tbody></table>
                 </section>
 
                 <section>
-                    <h2>Oof, that was rough, here's his proposal</h2>
-                    <p>https://github.com/jhusain/asyncgenerator</p>
+                    <pre><code class="javascript">
+async function *getStockPrices(stockName, currency) {
+  for(var price on getPrices(await getStockSymbol(stockName))) {
+    yield convert(price, currency);
+  }
+}
+
+// What type is prices?
+var prices = getStockPrices("JNJ", "CAN");
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Bam, observables</h2>
+                    <p>Push values as they come in</p>
+                </section>
+
+                <section>
+                    <h2><a
+                    href="https://github.com/jhusain/asyncgenerator"
+                    target="_blank">Oof, that was rough, just read his proposal</a></h2>
+                    <p></p>
+                </section>
+
+                <section>
+                    <h2>And the full version of the talk</h2>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/DqMFX91ToLw" frameborder="0" allowfullscreen></iframe>
                 </section>
                 <!-- ES2016 Jafar: END -->
 
@@ -168,7 +208,7 @@ async function printData() {
                 </section>
 
                 <section>
-                    <h2>Beautifully build simulation using HTML5 canvas</h2>
+                    <h2>Beautifully built simulation using HTML5 canvas</h2>
                     <p>If you're curious about building something similar, check out Eloquent Javascript</p>
                 </section>
                 <!-- Cold War - Simon Swain: END -->
@@ -180,7 +220,7 @@ async function printData() {
                 </section>
 
                 <section>
-                    <h2>Native was built with solving application problems in mind</h2>
+                    <h3>Native was built with solving application problems in mind</h3>
                     <h4>The web wasn't</h4>
                 </section>
 
@@ -220,8 +260,10 @@ async function printData() {
 
 
                 <!-- Making Relational Cool Again: BEGIN -->
-                <section>
-                    <h2>Making Relational Cool Again: Javascript on ACID</h2>
+                <section id="acid">
+                    <h2><a
+                href="https://speakerdeck.com/tgriesser/making-relational-cool-again-or-javascript-on-acid"
+                target="_blank">Making Relational Cool Again: Javascript on ACID</a></h2>
                     <h4>Tim Griesser</h4>
                 </section>
 
@@ -270,7 +312,7 @@ knex.select('*')
                     <p>Transactions</p>
                     <ul>
                         <li>Ability to roll back</li>
-                        <li>Snapshot stae of the world</li>
+                        <li>Snapshot state of the world</li>
                         <li>Prevent others from altering data you're working with</li>
                     </ul>
                 </section>
@@ -312,13 +354,15 @@ var Comment = bookshelf.Model.extend({
                 <!-- Making Relational Cool Again: END -->
 
                 <!-- Marik Kosak = Knitting for JS: BEGIN -->
-                <section>
-                    <h2>Knitting for Javascripters: Mariko Kosak</h2>
+                <section id="knitting">
+                    <h2><a target="_blank"
+                           href="http://kosamari.com/presentation/jsconf-2015/#/1">
+                        Knitting for Javascripters: Mariko Kosak</a></h2>
                     <h4>BKJS in the house</h4>
                 </section>
 
                 <section>
-                    <h2>I met Mariko right before moving out here</h2>
+                    <h4>I met Mariko right before moving out here</h4>
                     <p>Since then she's spoken at a couple borough meetups and helps run BKJS</p>
                     <p>And now she's speaking at JSConf</p>
                     <p>Feeling pretty bad about myself right now</p>
@@ -326,7 +370,8 @@ var Comment = bookshelf.Model.extend({
 
                 <section>
                     <h2>So right, knitting</h2>
-                    <p>Something possesed her to make a JS program to run a semi-automatic knitting machine</p>
+                    <p>Something possesed her to use JS to run a semi-automatic knitting machine</p>
+                    <img style="max-width: 60%" src="img/knittingMachine.jpg"/>
                 </section>
 
                 <section>
@@ -336,7 +381,331 @@ var Comment = bookshelf.Model.extend({
                     <p>Bugs in knitting are . . . different</p>
                 </section>
 
+                <section>
+                    <h2>Dithering!</h2>
+                    <img src="img/ditheredcat.png"/>
+                    <pre><code class="javascript">
+gm('cat.jpg').colors(2).dither()
+                    </code></pre>
+                </section>
+
+                <section>
+                    <img src="img/jsconfbefore.jpg"/>
+                    <img src="img/jsconfafter.jpg"/>
+                </section>
+
                 <!-- Marik Kosak = Knitting for JS: END -->
+
+                <!-- Mutations in Relay - Laney Kuenzel: START -->
+                <section id="relay">
+                    <h2><a target="_blank" href="https://speakerdeck.com/laneyk/mutations-in-relay">Mutations in Relay</a></h2>
+                    <h4>Laney Kuenzel</h4>
+                </section>
+
+                <section>
+                    <h4>Neither React nor Flux solve data fetching</h4>
+                    <p>Need to prevent scenarios where you're
+                        over-fetching</p>
+                    <p>Or worse, under-fetching and your page explodes</p>
+                </section>
+
+                <section>
+                    <h5>The current react structure has implementation
+                    details of components leaking to their parents</h5>
+                    <ul>
+                    <li>Changing a child neccessitates modiying all
+                        relevant parents</li>
+                    <li>But what if we could put the data query in the
+                        component</li>
+                    <li>I showed something similar during my parse presentation</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h5>It's hard to reason about when your render
+                    logic is on your client and your data fetching
+                        logic is on the server</h5>
+                    <p>What fields are getting sent down?</p>
+                    <p>Of that data what are we using in our application?</p>
+                </section>
+
+                <section>
+                    <h4>So how should this work in a perfect
+                        world?</h4>
+                    <p>Put the data fetching logic in the component
+                        and have it be totally self contained</p>
+                </section>
+
+                <section>
+                    <h2>GraphQL</h2>
+                    <ul>
+                    <li>Data query language</li>
+                    <li>FB's client apps have been using it to describe
+                        their data needs for the past couple years</li>
+                    <li>Query only what you need</li>
+                    <li>Composable, can build queries from other
+                        queries</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Relay</h2>
+                    <ul>
+                    <li>Takes the queries from each compnent in the
+                    tree and builds an overall query and sends that to
+                        the server</li>
+                    <li>Response is put in a single store</li>
+                    <li>One store helps with data consistency and
+                        lessens boilerplate common with Flux</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Mutations</h2>
+                    <p>Prior to relay mutation custom endpoints were
+                    set up</p>
+                    <p>Didn't scale well</p>
+                </section>
+
+                <section>
+                    <h2>Mutation requirements</h2>
+                    <ul>
+                        <li>Operation you want to perform</li>
+                        <li>Required inputs</li>
+                        <li>Query for the data you need
+                            post-operation</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Common scenarios built in</h2>
+                    <ul>
+                        <li>Optimistic updates</li>
+                        <li>Error handling</li>
+                        <li>Race conditions</li>
+                    </ul>
+                </section>
+
+                <!-- Mutations in Relay - Laney Kuenzel: END -->
+
+
+                <!--Recreating a Dialup Modem in JS: Saccone: START -->
+                <section id="modem">
+                    <h3><a target="_blank" href="http://slides.com/samccone/jsconf-us/#/">Recreating a Dialup Modem in JS</a></h3>
+                    <h4>Sam Saccone</h4>
+                </section>
+
+                <section>
+                    <h2>History lesson time</h2>
+                    <p>Telegraphy</p>
+                    <p>Morse code</p>
+                    <p>Baudot Code</p>
+                </section>
+
+                <section>
+                    <h4>Used to have to be directly connected to the
+                        other party</h4>
+                    <p>Doesn't scale well</p>
+                    <p>Multiplex sending info</p>
+                </section>
+
+                <section>
+                    <h2>TTY</h2>
+                    <img src="./img/tty.jpg"/>
+                    <p>Allows non-skilled operators</p>
+                </section>
+
+                <section>
+                    <h2>Why did we go this route?</h2>
+                    <p>Everyone had a phone line</p>
+                    <p>Worked with what we had</p>
+                </section>
+
+                <section>
+                    <h4>How do we get from a wave to frequency intensity?</h4>
+                    <p>Goertzel Algorithm - this is an algorithm for
+                        extracting a single frequency.</p>
+                    <p>You tell it the frequency you're looking for
+                        and it tells you the intensity.</p>
+                    <p>Not quite perfect...</p>
+                </section>
+
+                <section>
+                    <h2><a href="https://github.com/samccone/noise"
+                           target="_blank">Demo Time</a></h2>
+                    <p>Strings -> Binary</p>
+                    <p>Binary -> Audio</p>
+                </section>
+
+                <section>
+                    <h2>Demo Time</h2>
+                    <p>Adding static to the line</p>
+                    <p>Increasing baud</p>
+                    <p>Added multiplexing</p>
+                </section>
+
+                <!--Recreating a Dialup Modem in JS: Saccone: END -->
+
+                <!-- Visualizing process evolugion: START -->
+                <section>
+                    <h2>Visualizing process evolution</h2>
+                    <h4>Dann Toliver</h4>
+                </section>
+
+                <section>
+                    <h2>Yeah, this was kinda bonkers and deep</h2>
+                    <h4><a href="http://bentodojo.com/underview/" target="_blank">
+                        Here's some pictures</a></h4>
+                    <h4><a href="https://github.com/dxnn/underview"
+                           target="_blank">
+                        Underview</a>
+                    </h4>
+                </section>
+                <!-- Visualizing process evolugion: END -->
+
+                <!-- ES6: Ashely Williams: BEGIN -->
+                <section>
+                    <h4>
+                        <a
+                href="http://ashleygwilliams.github.io/jsconf-2015-deck/#1"
+                target="_blank">
+                            If you wish to learn ES6/2015 from
+                            scratch, you must first invent the universe
+                        </a>
+                    </h4>
+                    <h4>Ashley Williams</h4>
+                </section>
+
+                <section>
+                    <h2>ES6 Abstractions</h2>
+                    <p>Solid talk on what they are and why we need them</p>
+                </section>
+
+                <section>
+                    <h4>"Programs must be written for people to read,
+                    and only incidentally for machines to execute" --
+                        Abelson and Sussman</h4>
+                </section>
+
+                <section>
+                    <h2>Downside to syntatic sugar</h2>
+                    <p>We should understand what our language is doing
+                        under the hood</p>
+                    <p>SICP</p>
+                    <p>DTM</p>
+                </section>
+
+                <section>
+                    <h2>Say what you will about JS</h2>
+                    <h4>It keeps us close to the language</h4>
+                </section>
+                <!-- ES6: Ashely Williams: END -->
+
+                <!-- BABEL TALK: START -->
+                <section>
+                    <h2><a
+                href="https://speakerdeck.com/sebmck/javascript-transformation-jsconf-2015"
+                target="_blank">Javascript Transformation</a></h2>
+                    <h4>Sebastian McKenzie</h4>
+                </section>
+
+                <section>
+                    <h2>Babel</h2>
+                    <h4>Not just a shit show of RegExs</h4>
+                    <ul>
+                        <li>Move code into AST</li>
+                        <li>Manipulate AST</li>
+                        <li>Turn AST back into usable code</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Limitations</h2>
+                    <ul>
+                        <li>Can't prevent new'ing arrow functions</li>
+                        <li>No nice way to prevent access to
+                            prototype</li>
+                        <li>IE8 Fucks everything up (surprise).</li>
+                    </ul>
+                    <p>Better off with experimental flags when
+                        possible</p>
+                </section>
+
+                <section>
+                    <h2><a
+                    href="https://gist.github.com/sebmck/6760f024034c79fb2012"
+                    target="_blank">EMOJI TRANSFORMER</a></h2>
+                </section>
+                <!-- BABEL TALK: END -->
+
+                <!-- Automated accessibility testing: START -->
+                <section id="a11y">
+                    <h2><a target="_blank" href="http://marcysutton.github.io/a11y-automated-testing/#/">The Magic of Automated Accessibility
+                        Testing</a></h2>
+                    <h4>Marcy Sutton</h4>
+                </section>
+
+                <section>
+                    <h2>Did not know about this</h2>
+                    <img src="img/a11y.jpg"/>
+                </section>
+
+                <section>
+                    <h2>Via script</h2>
+                    <pre><code class="javascript hljs">
+var a11y = require('a11y');
+
+a11y('cnn.com', function (err, reports) {
+   var report = reports.report;
+   console.log(report);
+});
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Integration tests</h2>
+                    <pre>
+                        <code class="javascript">
+ describe('bottom sheet view', function() {
+  beforeEach(function() {
+    // click on share button
+    element(by.css('button.share')).click();
+  });
+
+  it('should focus on the first item', function() {
+    // verify focus was sent into bottom sheet
+    element.all(by.css('[ng-click="vm.performAction(item)"]'))
+      .then(function(items) {
+        expect(items[0].getAttribute('id'))
+          .toEqual(browser.driver.switchTo().activeElement().getAttribute('id'));
+    });
+                        </code>
+                    </pre>
+                </section>
+                <!-- Automated accessibility testing: END -->
+
+                <section>
+                    <h4>Did I mention this was at the beach?</h4>
+                    <img src="img/beach.jpg"/>
+                </section>
+
+                <section>
+                    <h4>So yeah, you should go</h4>
+                    <h5>And submit to speak</h5>
+                </section>
+
+                <section>
+                    <h3>Other take aways</h3>
+                    <ul>
+                        <li>Yep, other shops have their issues
+                            too</li>
+                        <li>People are building amazing shit in their
+                            spare time and you should be too</li>
+                        <li>No one will shut the fuck up about
+                            react</li>
+                        <li>JS is more than just pooping out new frameworks</li>
+                    </ul>
+
 			</div>
 
 		</div>
